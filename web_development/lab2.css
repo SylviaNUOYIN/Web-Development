@@ -1,0 +1,28 @@
+    
+.democlass {
+    color: black;
+    overflow: auto;  
+	height: 200px; 
+	width:900px;
+}
+
+.bgclass {
+	background-color: #ffffff;
+	overflow: auto;  
+	height: 200px; 
+	width:900px;
+}
+
+.sizeclass {
+	font-size: 50px;
+	overflow: auto; 
+	height: 200px; 
+	width:900px;
+}
+
+div.content {
+	overflow: auto; 
+	height: 200px; 
+	width:900px;
+}
+

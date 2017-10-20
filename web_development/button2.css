@@ -1,0 +1,10 @@
+
+div.content {
+	color: #B266FF;
+	font-family: "Palatino Linotype", Palatino, serif;
+	background-color: #A3DEDA;
+	font-size: 15px;
+	overflow: auto; 
+	height: 200px; 
+	width:900px;
+}

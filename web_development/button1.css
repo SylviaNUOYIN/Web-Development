@@ -1,0 +1,11 @@
+
+div.content {	
+	color: #6071DF;
+	font-family: "Courier New", Times, serif;
+	background-color: #93DF60;
+	font-size: 10px;
+	overflow: auto; 
+	height: 200px; 
+	width:900px;
+}
+

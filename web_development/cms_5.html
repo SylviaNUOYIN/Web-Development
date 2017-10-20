@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>My CMS</title>
+
+<link id="css" rel="stylesheet" type="text/css" href="lab2.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+
+var start = new Date().getTime();
+var during;
+
+var jsonFile;
+var toggle;
+
+$(document).ready(function()
+{
+	loadDoc('home.json');
+});
+			
+$(document).ajaxSend(function()
+{
+	write_msg("Loading...... ", 1);
+});
+			
+$(document).ajaxSuccess(function()
+{
+	during = new Date().getTime() - start;
+	write_msg("Welcome! Response " + during + " ms ", 0);
+});
+			
+$(document).ajaxError(function()
+{
+	during = new Date().getTime() - start;
+	write_msg("Sorry! Error :" + this.status + " " + this.statusText + " response " + during + " ms ", 2); 
+});			
+			
+
+function changeStyle(style) 
+{
+
+    $("#css").attr("href", style);
+    write_msg("Style changed to " + style, 1);
+
+}
+
+function write_msg(txt, level) {
+	$("#checkarea").html(txt);
+	// level 0 case 0
+	// level 1
+	// level 2
+	switch(level){
+		case 0 :
+			$("#checkarea").css("color", "green");
+			break;
+		case 1 :
+			$("#checkarea").css("color", "blue");
+			break;
+		case 2 :
+			$("#checkarea").css("color", "red");
+			break;
+		default :
+			$("#checkarea").css("color", "black");
+			
+	}
+	
+}
+
+
+
+function loadDoc(json) {
+ 	start = new Date().getTime();
+	$.getJSON(json, function(x) {
+    	jsonFile = x;
+		$("title").text(jsonFile.title);
+		$("#home").html(jsonFile.abstract);
+		toggle = 0;
+	});
+}
+
+function myToggle() {
+	if (toggle == 0) {
+		$("#home").toggle("fold", 500, update);
+		$("#home").toggle("fold", 500);
+		function update()
+		{
+			$("#home").html(jsonFile.long);
+			$("#toggle").html("Hide the Message");
+		}
+		write_msg("Show All the Message.", 3);
+		toggle = 1;
+	} else {
+		$("#home").toggle("fold",500, update);
+		$("#home").toggle("fold",500);
+		function update() {
+			$("#home").html(jsonFile.abstract);
+			$("#toggle").html("Show All the Message");
+		}
+		write_msg("Hide the Message.", 3);
+		toggle = 0;
+	}
+}
+
+
+
+
+
+</script>
+</head>
+<body>
+<table border="1">
+<tr>
+
+<td>
+<table border="1">
+
+<tr><td><img src="UCC_Logo_RGB_simplified.jpg" width="200" height="10%"></td><tr>
+<tr><td><button type="button" onclick="loadDoc('home.json')">Home</button></td></tr>
+<tr><td><button type="button" onclick="loadDoc('studies.json')">Studies</button></td></tr>
+<tr><td><button type="button" onclick="loadDoc('personal.json')">About me</button></td></tr>
+<tr><td><button type="button" onclick="loadDoc('link.json')">Links</button></td></tr>
+</table>
+</td>
+
+<td>
+<div class="content">
+<div id="home">
+</div>
+</div>
+</td>
+</tr>
+</table>
+<br>
+<div id="css1">
+<button onclick="changeStyle('button1.css')">one</button>
+<button onclick="changeStyle('button2.css')">two</button>
+<button onclick="changeStyle('button3.css')">three</button>
+<button id="toggle" onclick="myToggle()">Show All the Message</button>
+</div>
+
+<br><p id="checkarea">Checkarea</p>
+</body>
+
+</html>
